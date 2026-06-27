@@ -414,8 +414,8 @@
             <a href="#" class="back-btn" onclick="goBack(); return false;">返回索引</a>
 
             <div class="wiki-title-section">
-                <h1 class="wiki-title" id="drug-title">盐酸哌甲酯</h1>
-                <p class="wiki-subtitle" id="drug-subtitle">Methylphenidate Hydrochloride</p>
+                <h1 class="wiki-title" id="drug-title">利他能</h1>
+                <p class="wiki-subtitle" id="drug-subtitle">Ritalin · 盐酸哌甲酯</p>
             </div>
 
             <!-- 目录导航 -->
@@ -426,7 +426,7 @@
                     <li><a href="#section-pharmacology">药理作用</a></li>
                     <li><a href="#section-uses">临床应用</a></li>
                     <li><a href="#section-sideeffects">副作用</a></li>
-                    <li><a href="#section-info">药品信息</a></li>
+                    <li><a href="#section-notes">注意事项</a></li>
                 </ul>
             </div>
 
@@ -435,7 +435,7 @@
                 <div class="wiki-content">
                     <div class="wiki-section" id="section-intro">
                         <h2>简介</h2>
-                        <p id="section-intro-text"><b>盐酸哌甲酯</b>（英语：Methylphenidate），商品名包括<b>利他能</b>（Ritalin）、<b>专注达</b>（Concerta）等，是一种中枢神经系统兴奋剂。它主要用于治疗注意缺陷多动障碍（ADHD）和发作性睡病。</p>
+                        <p id="section-intro-text"><b>利他能</b>（英语：Ritalin），化学名盐酸哌甲酯，是一种中枢神经系统兴奋剂。它主要用于治疗注意缺陷多动障碍（ADHD）和发作性睡病。</p>
                     </div>
 
                     <div class="wiki-section" id="section-pharmacology">
@@ -451,25 +451,22 @@
                     <div class="wiki-section" id="section-sideeffects">
                         <h2>副作用</h2>
                         <p>常见的副作用包括食欲减退、失眠、焦虑和心率加快。长期高剂量使用可能会产生依赖性，因此属于严格管制的精神药品。</p>
-                        
+
                         <div class="warning-box">
                             <strong>警告：</strong>本药物属于第一类精神药品，在中国境内须凭医生处方购买和使用，切勿擅自用药或调整剂量。
                         </div>
                     </div>
 
-                    <div class="wiki-section" id="section-info">
-                        <h2>药品信息</h2>
-                        <p>本药物信息仅供医学知识参考。如有相关健康问题，请咨询专业医疗机构。</p>
+                    <div class="wiki-section" id="section-notes" style="display:none;">
+                        <h2>注意事项</h2>
+                        <p id="section-notes-text"></p>
                     </div>
                 </div>
 
                 <!-- 右侧信息栏 -->
                 <div class="wiki-sidebar">
                     <div class="infobox">
-                        <div class="infobox-header" id="infobox-title">盐酸哌甲酯</div>
-                        <div class="infobox-img">
-                            <img src="drug1.png" alt="药品图片" id="infobox-img">
-                        </div>
+                        <div class="infobox-header" id="infobox-title">利他能</div>
                         <table>
                             <tr>
                                 <th>化学名称</th>
@@ -510,48 +507,48 @@
         // 药物数据
         const drugData = {
             ritalin: {
-                title: '盐酸哌甲酯',
-                subtitle: 'Methylphenidate Hydrochloride',
+                title: '利他能',
+                subtitle: 'Ritalin · 盐酸哌甲酯',
                 breadcrumb: '利他能',
-                intro: '<b>盐酸哌甲酯</b>（英语：Methylphenidate），商品名包括<b>利他能</b>（Ritalin）、<b>专注达</b>（Concerta）等，是一种中枢神经系统兴奋剂。它主要用于治疗注意缺陷多动障碍（ADHD）和发作性睡病。',
-                img: 'drug1.png',
                 chemical: 'Methylphenidate Hydrochloride',
-                brand: '利他能 (Ritalin)<br>专注达 (Concerta)',
+                brand: '利他能 (Ritalin)',
                 category: '中枢神经兴奋剂',
-                indication: 'ADHD、发作性睡病'
+                indication: '注意缺陷多动障碍（ADHD）、发作性睡病',
+                intro: '<b>利他能</b>（英语：Ritalin），化学名盐酸哌甲酯，是一种用于治疗小儿多动症的中枢神经兴奋剂。它主要用于治疗注意缺陷多动障碍（ADHD）和发作性睡病。',
+                notes: '利他能遇泳池中的氯水会在三分钟内导致眼睛红肿。'
             },
             strattera: {
-                title: '盐酸托莫西汀',
-                subtitle: 'Atomoxetine Hydrochloride',
+                title: '择思达',
+                subtitle: 'Strattera · 盐酸托莫西汀',
                 breadcrumb: '择思达',
-                intro: '<b>盐酸托莫西汀</b>（英语：Atomoxetine），商品名<b>择思达</b>（Strattera），是一种选择性去甲肾上腺素再摄取抑制剂（SNRI）。它是目前首个被批准用于治疗 ADHD 的非中枢兴奋剂类药物。',
-                img: 'drug2.png',
                 chemical: 'Atomoxetine Hydrochloride',
                 brand: '择思达 (Strattera)',
                 category: '去甲肾上腺素再摄取抑制剂',
-                indication: '注意缺陷多动障碍 (ADHD)'
+                indication: '注意缺陷多动障碍 (ADHD)',
+                intro: '<b>择思达</b>（英语：Strattera），化学名盐酸托莫西汀，是一种选择性去甲肾上腺素再摄取抑制剂（SNRI）。它是目前首个被批准用于治疗 ADHD 的非中枢兴奋剂类药物。',
+                notes: ''
             },
             concerta: {
-                title: '哌甲酯缓释片',
-                subtitle: 'Methylphenidate Extended Release',
+                title: '专注达',
+                subtitle: 'Concerta · 哌甲酯缓释片',
                 breadcrumb: '专注达',
-                intro: '<b>专注达</b>（Concerta），化学名盐酸哌甲酯缓释片，采用 Oros 渗透泵技术，能够提供长达 12 小时的平稳药效释放。它是治疗 ADHD 的常用长效制剂。',
-                img: 'drug3.png',
                 chemical: 'Methylphenidate Hydrochloride',
                 brand: '专注达 (Concerta)',
                 category: '长效中枢兴奋剂',
-                indication: 'ADHD（6岁以上患者）'
+                indication: 'ADHD（6岁以上患者）',
+                intro: '<b>专注达</b>（英语：Concerta），化学名盐酸哌甲酯缓释片，采用 Oros 渗透泵技术，能够提供长达 12 小时的平稳药效释放。它是治疗 ADHD 的常用长效制剂。',
+                notes: ''
             },
             sertraline: {
-                title: '盐酸舍曲林',
-                subtitle: 'Sertraline Hydrochloride',
+                title: '左洛复',
+                subtitle: 'Zoloft · 盐酸舍曲林',
                 breadcrumb: '左洛复',
-                intro: '<b>盐酸舍曲林</b>（英语：Sertraline），商品名<b>左洛复</b>（Zoloft），是一种选择性5-羟色胺再摄取抑制剂（SSRI）。它广泛用于治疗抑郁症、焦虑症、强迫症和创伤后应激障碍。',
-                img: 'drug4.png',
                 chemical: 'Sertraline Hydrochloride',
                 brand: '左洛复 (Zoloft)',
                 category: 'SSRI 抗抑郁药',
-                indication: '抑郁症、焦虑症、强迫症'
+                indication: '抑郁症、焦虑症、强迫症',
+                intro: '<b>左洛复</b>（英语：Zoloft），化学名盐酸舍曲林，是一种选择性5-羟色胺再摄取抑制剂（SSRI）。它广泛用于治疗抑郁症、焦虑症、强迫症和创伤后应激障碍。',
+                notes: ''
             }
         };
 
@@ -566,17 +563,24 @@
             document.getElementById('breadcrumb-title').textContent = drug.breadcrumb;
             document.getElementById('section-intro-text').innerHTML = drug.intro;
             document.getElementById('infobox-title').textContent = drug.title;
-            document.getElementById('infobox-img').src = drug.img;
-            document.getElementById('infobox-img').alt = drug.title;
             document.getElementById('info-chemical').innerHTML = drug.chemical;
             document.getElementById('info-brand').innerHTML = drug.brand;
             document.getElementById('info-category').textContent = drug.category;
             document.getElementById('info-indication').textContent = drug.indication;
 
+            // 更新注意事项
+            const notesEl = document.getElementById('section-notes-text');
+            if (drug.notes) {
+                notesEl.textContent = drug.notes;
+                document.getElementById('section-notes').style.display = 'block';
+            } else {
+                document.getElementById('section-notes').style.display = 'none';
+            }
+
             // 切换页面
             document.getElementById('home-page').classList.remove('active');
             document.getElementById('detail-page').classList.add('active');
-            
+
             // 滚动到顶部
             window.scrollTo(0, 0);
         }
