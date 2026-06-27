@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精神类药物 / Psychotropic Medications</title>
+    <style>
+        /* --- 全局样式 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- 页面切换逻辑 --- */
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- 首页布局 --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+        header h1 { font-size: 2rem; color: #2c3e50; margin-bottom: 10px; }
+        header p { color: #7f8c8d; }
+
+        /* 网格布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* 图片容器 */
+        .card-img-wrapper {
+            height: 200px; /* 固定高度，防止图片长短不一导致排版乱 */
+            overflow: hidden;
+            background-color: #eef2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 核心修改点：图片样式 */
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 关键属性：让图片填满格子且不变形 */
+            display: block;
+        }
+
+        .card-content { padding: 20px; }
+        .card-tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .card h3 { font-size: 1.25rem; margin-bottom: 8px; color: #2c3e50; }
+        .card p { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+        .btn-more {
+            color: #3498db;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        /* --- 详情页 (维基百科风格) --- */
+        .wiki-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: #0645ad;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .back-btn:hover { text-decoration: underline; }
+        .back-btn::before { content: "← "; margin-right: 5px; }
+
+        .wiki-header { border-bottom: 1px solid #a2a9b1; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: baseline;}
+        .wiki-title { font-family: 'Linux Libertine', 'Georgia', Times, serif; font-size: 2.2rem; border-bottom: none; margin: 0; }
+        
+        .wiki-layout { display: flex; gap: 40px; flex-wrap: wrap; }
+        .wiki-content { flex: 2; min-width: 300px; }
+        .wiki-sidebar { 
+            flex: 1; 
+            min-width: 280px; 
+            background: #f8f9fa; 
+            border: 1px solid #a2a9b1; 
+            padding: 15px; 
+            font-size: 0.9rem;
+            height: fit-content;
+        }
+
+        .wiki-sidebar table { width: 100%; border-collapse: collapse; }
+        .wiki-sidebar th { background: #eaecf0; text-align: left; padding: 8px; border: 1px solid #a2a9b1; }
+        .wiki-sidebar td { padding: 8px; border: 1px solid #a2a9b1; }
+        .wiki-sidebar img { width: 100%; height: auto; border-bottom: 1px solid #ccc; margin-bottom: 10px; }
+        .wiki-sidebar .caption { text-align: center; font-size: 0.85rem; color: #555; margin-bottom: 10px; display: block;}
+
+        .wiki-section { margin-bottom: 25px; }
+        .wiki-section h2 { font-size: 1.5rem; border-bottom: 1px solid #a2a9b1; padding-bottom: 5px; margin-bottom: 15px; font-family: 'Linux Libertine', 'Georgia', Times, serif; }
+        .wiki-section p { margin-bottom: 15px; text-align: justify; }
+
+    </style>
+</head>
+<body>
+
+    <!-- === 第一级：列表页 === -->
+    <div id="home-page" class="page active">
+        <div class="container">
+            <header>
+                <h1>常用精神类药物索引</h1>
+                <p>Psychotropic Medications Index</p>
+            </header>
+
+            <div class="grid">
+                <!-- 卡片 1：利他能 (已更新图片逻辑) -->
+                <div class="card" onclick="showDetail('ritalin')">
+                    <div class="card-img-wrapper">
+                        <!-- ★ 请在这里替换您的图片文件名，例如 src="ritalin_box.jpg" -->
+                        <!-- 如果您还没有放图片文件，这里暂时用网络占位图演示效果 -->
+                        <img src="drug1.png" alt="利他能">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">中枢兴奋剂</span>
+                        <h3>利他能 (Ritalin)</h3>
+                        <p>盐酸哌甲酯缓释胶囊，常用于治疗注意缺陷多动障碍 (ADHD)。</p>
+                        <a href="#" class="btn-more">查看详情 &gt;</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 2 -->
+                <div class="card" onclick="showDetail('strattera')">
+                    <div class="card-img-wrapper">
+                        <!-- ★ 替换为您的第二张图片 -->
+                        <img src="drug2.png" alt="利他能">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">去甲肾上腺素再摄取抑制剂</span>
+                        <h3>择思达 (Strattera)</h3>
+                        <p>盐酸托莫西汀胶囊，非中枢兴奋剂类 ADHD 治疗药物。</p>
+                        <a href="#" class="btn-more">查看详情 &gt;</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="card" onclick="showDetail('concerta')">
+                    <div class="card-img-wrapper">
+                        <!-- ★ 替换为您的第三张图片 -->
+                        <img src="drug3.png" alt="利他能">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">长效中枢兴奋剂</span>
+                        <h3>专注达 (Concerta)</h3>
+                        <p>Oros 渗透泵技术，提供长达 12 小时的平稳药效释放。</p>
+                        <a href="#" class="btn-more">查看详情 &gt;</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 4 -->
+                <div class="card" onclick="showDetail('sertraline')">
+                    <div class="card-img-wrapper">
+                        <!-- ★ 替换为您的第四张图片 -->
+                        <img src="drug4.png" alt="利他能">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">SSRI 抗抑郁药</span>
+                        <h3>左洛复 (Zoloft)</h3>
+                        <p>盐酸舍曲林片，广泛用于抑郁症、焦虑症及强迫症的治疗。</p>
+                        <a href="#" class="btn-more">查看详情 &gt;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === 第二级：详情页 (维基百科风格) === -->
+    <div id="detail-page" class="page">
+        <div class="container">
+            <div class="wiki-container">
+                <!-- 返回按钮 -->
+                <div class="back-btn" onclick="goBack()">返回列表 (Back to List)</div>
+
+                <!-- 头部标题 -->
+                <div class="wiki-header">
+                    <h1 class="wiki-title">盐酸哌甲酯 (Methylphenidate)</h1>
+                </div>
+
+                <div class="wiki-layout">
+                    <!-- 左侧正文 -->
+                    <div class="wiki-content">
+                        <div class="wiki-section">
+                            <p><b>盐酸哌甲酯</b>（英语：Methylphenidate），商品名包括<b>利他能</b>（Ritalin）、<b>专注达</b>（Concerta）等，是一种中枢神经系统兴奋剂。它主要用于治疗注意缺陷多动障碍（ADHD）和发作性睡病。</p>
+                        </div>
+
+                        <div class="wiki-section">
+                            <h2>药理作用 (Pharmacology)</h2>
+                            <p>哌甲酯是一种去甲肾上腺素-多巴胺再吸收抑制剂（NDRI）。它通过阻断突触前神经元对多巴胺和去甲肾上腺素的再吸收，从而增加这些神经递质在突触间隙的浓度，提高大脑皮层的兴奋度，改善注意力集中能力。</p>
+                        </div>
+
+                        <div class="wiki-section">
+                            <h2>临床应用 (Medical Uses)</h2>
+                            <p>它是治疗 ADHD 的一线药物。对于儿童和成人患者，它能有效减少冲动、多动行为，并提高执行功能。此外，它也被用于治疗对其它疗法反应不佳的难治性抑郁症。</p>
+                        </div>
+                        
+                        <div class="wiki-section">
+                            <h2>副作用 (Side Effects)</h2>
+                            <p>常见的副作用包括食欲减退、失眠、焦虑和心率加快。长期高剂量使用可能会产生依赖性，因此属于严格管制的精神药品。</p>
+                        </div>
+                    </div>
+
+                    <!-- 右侧信息栏 (InfoBox) -->
+                    <div class="wiki-sidebar">
+                        <!-- 侧边栏图片 -->
+                        <img src="https://placehold.co/400x300/white/333?text=Chemical+Structure" alt="化学结构式">
+                        <span class="caption">盐酸哌甲酯的化学结构</span>
+
+                        <table>
+                            <tr>
+                                <th colspan="2" style="background:#ddd; text-align:center;">药物概览</th>
+                            </tr>
+                            <tr>
+                                <th>化学名称</th>
+                                <td>Methylphenidate Hydrochloride</td>
+                            </tr>
+                            <tr>
+                                <th>常见商品名</th>
+                                <td>Ritalin (利他能)<br>Concerta (专注达)</td>
+                            </tr>
+                            <tr>
+                                <th>药物类别</th>
+                                <td>中枢神经兴奋剂 (CNS Stimulant)</td>
+                            </tr>
+                            <tr>
+                                <th>适应症</th>
+                                <td>ADHD, 发作性睡病</td>
+                            </tr>
+                            <tr>
+                                <th>管制级别</th>
+                                <td>第一类精神药品 (中国)<br>Schedule II (美国)</td>
+                            </tr>
+                             <tr>
+                                <th>半衰期</th>
+                                <td>2–3 小时 (速释型)<br>6–8 小时 (缓释型)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 显示详情页
+        function showDetail(drugId) {
+            // 这里为了演示，点击任何卡片都跳转到同一个详情页模板
+            // 实际开发中可以根据 drugId 加载不同的数据
+            
+            document.getElementById('home-page').classList.remove('active');
+            document.getElementById('detail-page').classList.add('active');
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+
+        // 返回首页
+        function goBack() {
+            document.getElementById('detail-page').classList.remove('active');
+            document.getElementById('home-page').classList.add('active');
+        }
+    </script>
+</body>
+</html>
